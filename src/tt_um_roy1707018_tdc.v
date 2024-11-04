@@ -35,10 +35,10 @@ module tt_um_roy1707018_tdc (
     sensor #(
         .N_DELAY(N_DELAY) // Set the number of inverter stages
     ) sensor_inst (
-        .input(inverted_clk),
+        .i(inverted_clk),
         .delayed_clk(delayed_clk)
     );
-     assign uo_out[0] = inverted_clk;
+    assign uo_out[0] = inverted_clk;
     assign uo_out[1] = delayed_clk;
     assign uo_out[7:2] = 6'b0;
     assign uio_out = 0;
