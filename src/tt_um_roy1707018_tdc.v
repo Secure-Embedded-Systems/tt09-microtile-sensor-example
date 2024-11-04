@@ -27,6 +27,7 @@ module tt_um_roy1707018_tdc (
     
     // Delayed clock signal
     wire delayed_clk;
+    wire inverted_clk; 
     // Assign the inverted value of clk to inverted_clk
      assign inverted_clk = ~clk;
 
