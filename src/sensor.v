@@ -1,9 +1,7 @@
 `default_nettype none
-module tdc_delay #(parameter N_DELAY = 32) (
-    input wire  rst_n,           // Active-low reset
+module sensor #(parameter N_DELAY = 16) (
     input wire  clk,             // System clock
-    input wire  start,           // Start signal
-    output wire [N_DELAY-1:0] time_count // Time difference (number of transitions)
+    output wire delayed_clk // Time difference (number of transitions)
 );
 
 
@@ -20,9 +18,7 @@ module tdc_delay #(parameter N_DELAY = 32) (
 (* keep = "true" *) wire [N_DELAY+1:0] w_dly_sig_10;
 (* keep = "true" *) wire [N_DELAY:0] w_dly_sig_n;
 
-reg [N_DELAY-1:0] r_dly_store;
-
-assign w_dly_sig[0] = start;
+assign w_dly_sig[0] = clk;
 
 genvar i;
 generate
@@ -44,19 +40,7 @@ generate
             // The final inverter chain back to w_dly_sig for the next iteration
             (* keep = "true" *) cinv dly_stg12 (.a(w_dly_sig_n[i]), .q(w_dly_sig[i+1]));
     end
-endgenerate
 
+assign delayed_clk = w_dly_sig[N_DELAY];
 
-
-always @(posedge clk or  posedge start) begin
-    if (start) begin
-        r_dly_store <= {N_DELAY{1'b0}};  // On rising edge of 'start', reset r_dly_store to 0
-    end else begin
-        r_dly_store <= w_dly_sig[N_DELAY:1];  // Otherwise, update with w_dly_sig[N_DELAY:1]
-    end
-end
-
-   
- assign time_count = r_dly_store;
-
-endmodule // tdc
+endmodule
