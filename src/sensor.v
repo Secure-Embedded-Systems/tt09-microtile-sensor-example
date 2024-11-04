@@ -1,7 +1,7 @@
 `default_nettype none
 
 module sensor #(parameter N_DELAY = 16) (
-    input wire  clk,             // System clock
+    input wire  input,             // System clock
     output wire delayed_clk      // Delayed clock output
 );
 
@@ -18,7 +18,7 @@ module sensor #(parameter N_DELAY = 16) (
     (* keep = "true" *) wire [N_DELAY+1:0] w_dly_sig_10;
     (* keep = "true" *) wire [N_DELAY:0] w_dly_sig_n;
 
-    assign w_dly_sig[0] = clk;
+    assign w_dly_sig[0] = input;
 
     genvar i;
     generate

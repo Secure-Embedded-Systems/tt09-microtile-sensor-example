@@ -29,17 +29,18 @@ module tt_um_roy1707018_tdc (
     wire delayed_clk;
     wire inverted_clk; 
     // Assign the inverted value of clk to inverted_clk
-     assign inverted_clk = ~clk;
+    (* keep = "true" *) assign inverted_clk = ~clk;
 
     // Instantiate the sensor module
     sensor #(
-        .N_DELAY(16) // Set the number of inverter stages
+        .N_DELAY(N_DELAY) // Set the number of inverter stages
     ) sensor_inst (
-        .clk(inverted_clk),
+        .input(inverted_clk),
         .delayed_clk(delayed_clk)
     );
      assign uo_out[0] = inverted_clk;
     assign uo_out[1] = delayed_clk;
+    assign uo_out[7:2] = 6'b0;
     assign uio_out = 0;
     assign uio_oe = 0;
 
