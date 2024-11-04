@@ -27,9 +27,9 @@ module tt_um_roy1707018_tdc (
     
     // Delayed clock signal
     wire delayed_clk;
-    wire inverted_clk; 
+    (* keep = "true" *) wire inverted_clk; 
     // Assign the inverted value of clk to inverted_clk
-    (* keep = "true" *) assign inverted_clk = ~clk;
+    assign inverted_clk = ~clk;
 
     // Instantiate the sensor module
     sensor #(
