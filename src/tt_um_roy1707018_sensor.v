@@ -5,7 +5,7 @@
 
 `default_nettype none
 
-module tt_um_roy1707018_tdc (
+module tt_um_roy1707018_sensor (
 
 	      // Include power ports for the Gate Level test:
 `ifdef GL_TEST
