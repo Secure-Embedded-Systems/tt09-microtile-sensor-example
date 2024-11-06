@@ -1,6 +1,6 @@
 `default_nettype none
 
-module sensor #(parameter N_DELAY = 16) (
+module sensor #(parameter N_DELAY = 8) (
     input wire inverted_clk,              // System clock
     output wire delayed_clk               // Delayed clock output
 );
